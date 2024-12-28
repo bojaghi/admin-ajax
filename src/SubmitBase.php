@@ -184,7 +184,7 @@ abstract class SubmitBase implements Module
      */
     public static function parseStdinJson(): void
     {
-        if ('application/json' === $_SERVER['CONTENT_TYPE'] ?? '' && 'POST' === $_SERVER['REQUEST_METHOD'] ?? '') {
+        if ('application/json' === ($_SERVER['CONTENT_TYPE'] ?? '') && 'POST' === ($_SERVER['REQUEST_METHOD'] ?? '')) {
             $source = apply_filters('Bojaghi\\AdminAjax\\SubmitBase::parseStdin/source', 'php://input', $_POST['action'] ?? '');
             $input  = file_get_contents($source);
             $params = json_decode($input, true);
