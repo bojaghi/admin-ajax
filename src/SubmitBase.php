@@ -144,7 +144,10 @@ abstract class SubmitBase implements Module
             $cls    = $split[0];
             $method = $split[1];
 
-            if (class_exists($cls) && method_exists($cls, $method)) {
+            if (
+                (class_exists($cls) && method_exists($cls, $method)) || // Fully-qualified class name or instance.
+                ($this->container?->has($cls) && is_string($cls))       // Identifier that the container knows.
+            ) {
                 if (is_callable([$cls, $method])) {
                     // Static methods.
                     return [$cls, $method];
