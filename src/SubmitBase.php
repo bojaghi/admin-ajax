@@ -98,7 +98,7 @@ abstract class SubmitBase implements Module
 
     public function dispatch(): void
     {
-        $action = sanitize_key($_REQUEST['action'] ?? '');
+        $action = wp_unslash($_REQUEST['action'] ?? '');
 
         // Skip if not listed.
         if (!isset($this->items[$action])) {
